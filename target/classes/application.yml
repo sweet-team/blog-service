@@ -1,0 +1,31 @@
+server:
+  port: 8000
+#logging:
+#  level:
+#    root: info
+debug: true
+fdfs:
+  connect-timeout: 601
+  so-timeout: 1510
+  thumb-image:
+    height: 800
+    width: 494
+  #  tracker-list: 172.17.26.197:22122
+  tracker-list: 192.168.0.104:22122
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    url: jdbc:mysql://192.168.0.104:3306/my_blog?useUnicode=true&characterEncoding=utf8
+    #    url: jdbc:mysql://127.0.0.1:3306/my_sweet?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Li_Xue_123456
+    hikari:
+      connection-init-sql: SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+  servlet:
+    multipart:
+      max-file-size: 120MB
+      max-request-size: 100MB
