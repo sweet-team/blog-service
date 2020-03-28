@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class Experience {
+public class ExperienceController {
 
    /* @GetMapping("/test")
     public ResponseEntity<List<Test>> test(){

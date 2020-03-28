@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity(name="lx_friend_links")
 @Data
 public class FriendLinks {
-    private String url;
+    private Long url;
     private String name;
     @Id
     @GeneratedValue

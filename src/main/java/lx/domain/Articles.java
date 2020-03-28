@@ -10,9 +10,9 @@ import javax.persistence.*;
 public class Articles {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private String img;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ArticleType type;
     private String title;
     private Long date;

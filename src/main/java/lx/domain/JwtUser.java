@@ -13,12 +13,13 @@ public class JwtUser implements UserDetails {
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-
+    private String role;
     public JwtUser(){}
     public JwtUser(User user){
         this.id =user.getId();
         this.username=user.getUsername();
         this.password = user.getPassword();
+        this.role = user.getRole();
         authorities = Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
     }
 
@@ -55,5 +56,9 @@ public class JwtUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

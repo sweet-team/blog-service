@@ -15,6 +15,6 @@ public class Comment {
     private Long date;
     @Column(name = "is_article")
     private Boolean isArticle;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Articles article;
 }

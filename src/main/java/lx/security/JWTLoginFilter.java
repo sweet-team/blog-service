@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.StringUtils;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -43,10 +45,14 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
-        User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
-        String role = user.getRole();
         JwtUser jwtUser = (JwtUser)authResult.getPrincipal();
-        String token = JwtTokenUtils.createToken(jwtUser.getUsername(), role.equals(Role.adminRole));
+        Collection<? extends GrantedAuthority> authorities = jwtUser.getAuthorities();
+        String authority = "";
+        for (GrantedAuthority g :
+                authorities) {
+            authority = g.getAuthority();
+        }
+        String token = JwtTokenUtils.createToken(jwtUser.getUsername(), authority ,jwtUser.getRole().equals(Role.adminRole));
         response.setHeader("authentication",JwtTokenUtils.TOKEN_PREFIX+token);
     }
 

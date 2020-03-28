@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Experience {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     private String post;
     private String content;
